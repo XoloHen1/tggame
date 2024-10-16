@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tap Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+
+        .tap-btn {
+            padding: 20px 40px;
+            font-size: 24px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button class="tap-btn" onclick="tap()">Tap Me!</button>
+    <p id="score">Score: 0</p>
+
+    <script>
+        let score = 0;
+
+        function tap() {
+            score += Math.floor(Math.random() * 10) + 1;
+            document.getElementById('score').innerText = 'Score: ' + score;
+
+            // Отправка данных обратно в Telegram (например, обновление счета)
+            Telegram.WebApp.sendData(JSON.stringify({ score: score }));
+        }
+
+        // Автоматический запуск Web App после загрузки страницы
+        Telegram.WebApp.ready();
+    </script>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</body>
+</html>
